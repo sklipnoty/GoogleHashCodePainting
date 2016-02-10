@@ -12,7 +12,6 @@ public class StartUp {
             Painting logoPainting = new Painting(logoReader);
             
             
-            
         } catch (IOException e) {
             e.printStackTrace();
         }
