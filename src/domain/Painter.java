@@ -2,14 +2,12 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class Painter {
-    public Painter(Painting painting) {
-       solvePainting(painting); 
-    }
 
-    private void solvePainting(Painting painting) {
+    public List<String> solvePainting(Painting painting) {
         //Just look for horz. and vert lines.
         
         boolean[][] mapping = painting.getMapping();
@@ -28,7 +26,7 @@ public class Painter {
                 line.setStartX(i);
                 line.setStartY(j);
             
-                while(mapping[i][j]) {
+                while (j < mapping[i].length && mapping[i][j]) {
                     j++;
                 }
                 
@@ -51,7 +49,7 @@ public class Painter {
                 line.setStartX(j);
                 line.setStartY(i);
             
-                while(mapping[j][i]) {
+                while (j < mapping.length && mapping[j][i]) {
                     j++;
                 }
                 
@@ -64,23 +62,27 @@ public class Painter {
         
         // remove from painting
         
-        while(!lines.isEmpty()) {
+        ArrayList<String> commands = new ArrayList<>();
+        
+        while (!lines.isEmpty()) {
             Line line = lines.poll();
-            
-            for(int i = 0;  i < removedLines.size(); i++) {
-                if(line.isValid(removedLines.get(i))){
-                    
-                }
-            }
-            
-            
             removedLines.add(line);
-            painting.removeLine(line);
+            if (!painting.isAlreadyPainted(line))
+            {
+                painting.removeLine(line);
+                commands.add(generatePaintCommand(line));
+            }
         }
         
-        
-        
-        
-        
+        return commands;
+    }
+    
+    public String generatePaintCommand(Line line)
+    {
+        // PAINT_LINE 0 4 3 4
+        return String.format("PAINT_LINE %d %d %d %d",
+                line.getStartX(), line.getEndX(),
+                line.getStartY(), line.getEndY());
+                
     }
 }

@@ -61,8 +61,31 @@ public class Line implements Comparable<Line>{
         return Integer.compare(this.getLength(), line.getLength());
     }
 
-    public boolean isValid(Line line2) {
-        return false;
-    }
+//    public boolean isValid(Line line2) {
+//        if (isVertical() && line2.isVertical()) {
+//            // both vertical
+//            /*
+//            + <- startY
+//            +
+//            +
+//            + <- endY
+//            
+//            + <- startY
+//            +
+//            + <- endY
+//            */
+//            boolean noOverlap = (getEndY() < line2.getStartY() || line2.getEndY() < getStartY());
+//            return !noOverlap;
+//        }
+//        else if (!isVertical() && !line2.isVertical()) {
+//            // both horizontal
+//            boolean noOverlap = (getEndX() < line2.getStartX() || line2.getEndX() < getStartX());
+//            return !noOverlap;
+//        }
+//        else {
+//            // one vertical, one horizontal
+//        }
+//        return false;
+//    }
     
 }
