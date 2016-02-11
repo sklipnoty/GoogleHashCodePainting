@@ -78,25 +78,33 @@ public class Painting
 
     public void print()
     {
-
+        System.out.println("-------------------------------------------------------------------------------------------");
+        for(int i = 0; i < rows; i++) {
+            System.out.println("");
+            for(int j = 0; j < cols; j++) {
+                System.out.print((painted[i][j] ? "#" : "."));
+            }
+        }
+        
+        System.out.println("");
     }
 
     public void removeLine(Line line)
     {
         if (line.isVertical())
         {
-            for (int i = line.getStartY(); i < line.getEndY(); i++)
+            for (int i = line.getStartX(); i <= line.getEndX(); i++)
             {
-                mapping[i][line.getEndX()] = false;
-                painted[i][line.getEndX()] = true;
+                mapping[line.getStartY()][i] = false;
+                painted[line.getStartY()][i] = true;
             }
         }
         else
         {
-            for (int i = line.getStartX(); i < line.getEndX(); i++)
+            for (int i = line.getStartY(); i <= line.getEndY(); i++)
             {
-                mapping[line.getStartY()][i] = false;
-                painted[line.getStartY()][i] = true;
+                mapping[i][line.getEndX()] = false;
+                painted[i][line.getEndX()] = true;
             }
         }
     }
@@ -105,9 +113,9 @@ public class Painting
     {
         if (line.isVertical())
         {
-            for (int i = line.getStartY(); i < line.getEndY(); i++)
+            for (int i = line.getStartX(); i <= line.getEndX(); i++)
             {
-                if (!painted[line.getEndX()][i])
+                if (!(painted[line.getEndY()][i]))
                     return false;
             }
             
@@ -115,9 +123,9 @@ public class Painting
         }
         else
         {
-            for (int i = line.getStartX(); i < line.getEndX(); i++)
+            for (int i = line.getStartY(); i <= line.getEndY(); i++)
             {
-                if (!painted[i][line.getEndY()])
+                if (!(painted[i][line.getEndX()]))
                     return false;
             }
             

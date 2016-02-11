@@ -5,6 +5,7 @@ public class Line implements Comparable<Line>{
     private int startY;
     private int endX;
     private int endY;
+    private int length;
 
     public Line() {
     }
@@ -49,7 +50,8 @@ public class Line implements Comparable<Line>{
     }
     
     public int getLength() {
-       return Math.max((endY - startY), (endX-startX));
+       this.length = Math.max((endY - startY), (endX-startX));
+       return length;
     }
     
     public boolean isVertical() {
@@ -58,7 +60,7 @@ public class Line implements Comparable<Line>{
 
     @Override
     public int compareTo(Line line) {
-        return Integer.compare(this.getLength(), line.getLength());
+        return -Integer.compare(this.getLength(), line.getLength());
     }
 
 //    public boolean isValid(Line line2) {
@@ -87,5 +89,13 @@ public class Line implements Comparable<Line>{
 //        }
 //        return false;
 //    }
+
+    @Override
+    public String toString() {
+        return "Line{" + "startX=" + startX + ", startY=" + startY + ", endX=" + endX + ", endY=" + endY + ", length=" + length + '}';
+    }
+    
+    
+    
     
 }

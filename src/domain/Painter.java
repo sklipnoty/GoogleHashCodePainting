@@ -16,22 +16,22 @@ public class Painter {
         
         //hozir
         for(int i = 0; i < mapping.length; i++) {
-            Line line = new Line();
             for(int j = 0; j < mapping[0].length; j++) {
+                Line line = new Line();
                 
                 //end row or start of a line
                 while(j < mapping[i].length && !mapping[i][j]) 
                     j++;
                 
-                line.setStartX(i);
-                line.setStartY(j);
+                line.setStartX(j);
+                line.setStartY(i);
             
                 while (j < mapping[i].length && mapping[i][j]) {
                     j++;
                 }
                 
-                line.setEndX(i);
-                line.setEndY(j-1);
+                line.setEndX(j-1);
+                line.setEndY(i);
                 
                 lines.add(line);
             }
@@ -39,22 +39,21 @@ public class Painter {
         
         //vert
         for(int i = 0; i < mapping[0].length; i++) {
-            Line line = new Line();
             for(int j = 0; j < mapping.length; j++) {
-                
+                 Line line = new Line();
                 //end row or start of a line
                 while(j < mapping.length && !mapping[j][i]) 
                     j++;
                 
-                line.setStartX(j);
-                line.setStartY(i);
+                line.setStartX(i);
+                line.setStartY(j);
             
                 while (j < mapping.length && mapping[j][i]) {
                     j++;
                 }
                 
-                line.setEndX(j-1);
-                line.setEndY(i);
+                line.setEndX(i);
+                line.setEndY(j-1);
                 
                 lines.add(line);
             }
@@ -71,6 +70,7 @@ public class Painter {
             {
                 painting.removeLine(line);
                 commands.add(generatePaintCommand(line));
+                painting.print();
             }
         }
         
@@ -81,8 +81,8 @@ public class Painter {
     {
         // PAINT_LINE 0 4 3 4
         return String.format("PAINT_LINE %d %d %d %d",
-                line.getStartX(), line.getEndX(),
-                line.getStartY(), line.getEndY());
+                line.getStartX(), line.getStartY(),
+                line.getEndX(), line.getEndY());
                 
     }
 }
