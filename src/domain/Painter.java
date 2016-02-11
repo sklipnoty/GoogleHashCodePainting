@@ -70,7 +70,6 @@ public class Painter {
             {
                 painting.removeLine(line);
                 commands.add(generatePaintCommand(line));
-                painting.print();
             }
         }
         
@@ -81,8 +80,8 @@ public class Painter {
     {
         // PAINT_LINE 0 4 3 4
         return String.format("PAINT_LINE %d %d %d %d",
-                line.getStartX(), line.getStartY(),
-                line.getEndX(), line.getEndY());
+                line.getStartY(), line.getStartX(),
+                line.getEndY(), line.getEndX());
                 
     }
 }

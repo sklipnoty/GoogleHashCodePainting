@@ -9,14 +9,21 @@ import java.util.List;
 public class StartUp {
 
     public static void main(String args[]) {
-        try (BufferedReader logoReader = new BufferedReader(new FileReader("input/logo.in"))) {
+        try (
+                BufferedReader logoReader = new BufferedReader(new FileReader("input/logo.in"));
+                BufferedReader learnReader = new BufferedReader(new FileReader("input/learn_and_teach.in"));
+                BufferedReader rightAngle = new BufferedReader(new FileReader("input/right_angle.in"))) {
             Painting logoPainting = new Painting(logoReader);
+            Painting learnPainting = new Painting(learnReader);
+            Painting rightPainting = new Painting(rightAngle);
+
             Painter painter = new Painter();
-            List<String> paintCommands = painter.solvePainting(logoPainting);
-            System.out.println(paintCommands.size());
-            for (String cmd : paintCommands)
-                System.out.println(cmd);
-            
+            OutputMaker outputMaker = new OutputMaker();
+
+            outputMaker.makeOutput(painter.solvePainting(logoPainting), "logoOut");
+            outputMaker.makeOutput(painter.solvePainting(learnPainting), "learnOut");
+            outputMaker.makeOutput(painter.solvePainting(rightPainting), "rightOut");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
